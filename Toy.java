@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Toy {
     
@@ -9,11 +10,15 @@ public class Toy {
 
     public Toy(String name, int probability){
         this.name = name;
-        this.probability = probability;
+        this.probability = ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
     
     public int getID(){
         return this.id;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public int getProbability(){
@@ -22,6 +27,10 @@ public class Toy {
 
     public void setProbability(int p){
         this.probability = p;
+    }
+
+    public String toString(){
+        return "Игрушка " + getName() + "Вероятность выпадения " + getProbability();
     }
 }
 
