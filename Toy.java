@@ -1,18 +1,25 @@
-import java.util.Random;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Toy {
-    
+    private int id= 0;
     public String name;
-    private int id;
     private int probability;
-    // int count;
+    private static int count = 1;
 
-    public Toy(String name, int probability){
+    public Toy(String name){
+        this.id = count++;
+        // giveID();
         this.name = name;
         this.probability = ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
-    
+
+    // private  int giveID(int id)
+    // //присвоение id
+    // {
+    //     return ++id;
+    // }
+
     public int getID(){
         return this.id;
     }
@@ -30,7 +37,7 @@ public class Toy {
     }
 
     public String toString(){
-        return "Игрушка " + getName() + "Вероятность выпадения " + getProbability();
+        return "Id " + getID() + " Игрушка " + getName() + " Вероятность выпадения: " + getProbability() + "%";
     }
 }
 

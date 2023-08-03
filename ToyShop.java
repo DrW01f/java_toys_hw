@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
-public class ToyShop{
+public class ToyShop {
 
 
-ArrayList <Toy> toyList = new ArrayList<>();
+static ArrayList <Toy> toyList = new ArrayList<>();
 
 
-public void addToy(Toy toy){
+
+public static void addToy(Toy toy){
     toyList.add(toy);
 }
 
