@@ -1,12 +1,14 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class ToyShop {
 
+    static String path = "winToysLog.txt";
     static ArrayList <Toy> toyList = new ArrayList<>();
-
-    String path = "winToysLog.txt";
-    private PriorityQueue<Toy> pq = new PriorityQueue<>();
+    private static PriorityQueue<Toy> pq = new PriorityQueue<>();
 
     public PriorityQueue<Toy> addToysToQueue(Toy toy) {
         for (int i = 0; i < toyList.size(); i++) {
@@ -15,7 +17,7 @@ public class ToyShop {
         return pq;
     }
 
-    public PriorityQueue<Toy> changeProbability(String name, int probability){
+    public static PriorityQueue<Toy> changeProbability(String name, int probability){
         for (Toy toy : pq){
             if (toy.getName().equals(name)){
                 toy.setProbability(probability);
@@ -24,13 +26,11 @@ public class ToyShop {
         return pq;
     }
 
-
     public static void addToy(Toy toy){
         toyList.add(toy);
     }
 
-
-    public void showAllToys(){
+    public static void showAllToys(){
         if (toyList.size() > 0){
             System.out.println("Список доступных призов: ");
             for (int i = 0; i < toyList.size(); i++) {
@@ -41,20 +41,34 @@ public class ToyShop {
         else{System.out.println("Призы закончились");
         }
     }
-
         
-    public void lottery(){
+    public static void lottery(){
         ArrayList<Toy> winToysList = new ArrayList<>();
         if (toyList.size() > 0){
             System.out.println("Осталось еще" + toyList.size() + "Игрушек");
             System.out.println("Желаю удачи");
             Toy winToy = pq.poll();
-            winToysList.add(winToy);                     
-            // return toyList.remove(0);
+            winToysList.add(winToy);
+             System.out.println("Поздравляю! Вы выйграли " + winToy.getName());
+            for (Toy toy : winToysList){
+                if (toy.getName().equals(winToy.getName())){
+                    toyList.remove(winToy);
+                }
+            }                                       
         }
         else {
             winToysList.add(null);
             System.out.println("Призы закончились, приходите в следующий раз");
+        }
+        try(FileWriter fw = new FileWriter(path, StandardCharsets.UTF_8, false)){
+            for(Toy toy : winToysList){
+                if (toy != null) {
+                    fw.write(toy + "\n");
+                }
+            }
+        }
+        catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
     

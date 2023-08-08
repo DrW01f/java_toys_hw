@@ -1,73 +1,49 @@
 import java.util.Scanner;
 
-public class Menu {
+public class Menu {    
     
+    public boolean key = true;
     Scanner scanner = new Scanner(System.in);
-    boolean key = true;
-    while (key){
-    findMenu();
-    int filter = scanner.nextInt();
+
     
-    switch (filter){
-        case 1 -> {
-            System.out.println("Введите стоимость");
-            String coast = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.getcoast() == Integer.parseInt(coast)){
-                    System.out.println(note);
-                }                
-            } 
-        }               
-        case 2 -> {
-            System.out.println("Введите объем оперативной памяти");
-            String ramCount = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.getramCount() == Integer.parseInt(ramCount)){
-                    System.out.println(note);
-                }                
-            }
-        }
-        case 3 -> {
-            System.out.println("Введите объем жеского диска");
-            String hardDriveCount = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.gethardDriveCount() == Integer.parseInt(hardDriveCount)){
-                    System.out.println(note);
-                }                
-            }
-        }
-        case 4 -> {
-            System.out.println("Введите операционную систему");
-            String operationSystem = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.getoperationSystem().equals(operationSystem)){
-                    System.out.println(note);
-                }                
-            }
-        }
-        case 5 -> {
-            System.out.println("Введите цвет");
-            String color = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.getcolor().equals(color)){
-                    System.out.println(note);
-                }                
-            }
-        }
-        case 6 -> {
-            System.out.println("Введите объем видеокарты");
-            String videoCardCapacity = scanner.next();
-            for(Notebook note: notebookss){
-                if (note.getvideoCardCapacity() == Integer.parseInt(videoCardCapacity)){
-                    System.out.println(note);
-                }                
-            }
-        }
-        default -> {
-            key = false;
-        }
-    }     
+    while(key){
+        System.out.print("""
+            Введите действие:
+            1. Добавление игрушки
+            2. Показать список игрушек
+            3. Розыгрыш игрушек
+            4. Изменения частоты выпадания (имя, новая вероятность)
 
+            0. Выход
+            \s""");
+
+        int filter = scanner.nextInt();
+        
+        switch (filter){
+            case 1 -> {
+                System.out.println("Введите название игрушки");
+                String name = scanner.next();
+                Toy toy = new Toy(name);
+            }   
+            case 2 -> {
+                ToyShop.showAllToys();                
+            }            
+            case 3 -> {
+                ToyShop.lottery();                
+            }
+            case 4 -> {
+                String name = scanner.next();
+                String probability = scanner.next();
+                int probabilityInt = Integer.parseInt(probability);
+                ToyShop.changeProbability(name, probabilityInt);                
+            }
+            case 0 -> {
+                key = false;
+            }
+            // default -> {
+            //     // break;
+            //     key = false;
+            // }
+        }   
     } 
-
 }
