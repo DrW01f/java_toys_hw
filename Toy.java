@@ -36,6 +36,15 @@ public class Toy {
         this.probability = p;
     }
 
+    public int compareTo(Toy t) {
+        if (this.probability < t.probability) 
+            return 1;
+        else if (this.probability > t.probability) 
+            return -1;
+        else 
+            return 0;
+    }
+
     public String toString(){
         return "Id " + getID() + " Игрушка " + getName() + " Вероятность выпадения: " + getProbability() + "%";
     }
