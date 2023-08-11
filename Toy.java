@@ -1,8 +1,8 @@
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Toy {
-    private int id= 0;
+public class Toy implements Comparable<Toy>{
+    private int id= 5;
     public String name;
     private int probability;
     private static int count = 1;
@@ -13,12 +13,6 @@ public class Toy {
         this.name = name;
         this.probability = ThreadLocalRandom.current().nextInt(0, 100 + 1);
     }
-
-    // private  int giveID(int id)
-    // //присвоение id
-    // {
-    //     return ++id;
-    // }
 
     public int getID(){
         return this.id;
@@ -36,6 +30,7 @@ public class Toy {
         this.probability = p;
     }
 
+    @Override
     public int compareTo(Toy t) {
         if (this.probability < t.probability) 
             return 1;

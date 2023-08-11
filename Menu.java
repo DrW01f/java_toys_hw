@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Menu {    
     
-    public static void menu() {
-        boolean key = true;
+    public static  void menu() {
+       
         Scanner scanner = new Scanner(System.in);
             
-        while(key){
+        while(true){
             System.out.print("""
                 Введите действие:
                 1. Добавление игрушки
@@ -16,34 +16,23 @@ public class Menu {
                 0. Выход
                 \s""");
 
-            int filter = scanner.nextInt();
-            
-            switch (filter){
-                case 1 -> {
-                    System.out.println("Введите название игрушки");
-                    String name = scanner.next();
-                    Toy toy = new Toy(name);
-                }   
-                case 2 -> {
-                    ToyShop.showAllToys();                
-                }            
-                case 3 -> {
-                    ToyShop.lottery();                
-                }
-                case 4 -> {
-                    String name = scanner.next();
-                    String probability = scanner.next();
-                    int probabilityInt = Integer.parseInt(probability);
-                    ToyShop.changeProbability(name, probabilityInt);                
-                }
-                case 0 -> {
-                    key = false;
-                }
-                // default -> {
-                //     // break;
-                //     key = false;
-                // }
-            }   
+            String filter = scanner.next();
+            if (filter.equals("1") ){
+                ToyShop.addToysToQueue();
+            }
+            else if (filter.equals("2")){
+                ToyShop.showAllToys();
+            }
+             else if (filter.equals("3")){
+                ToyShop.lottery();
+            } 
+             else if (filter.equals( "4")){
+                ToyShop.changeProbability();
+            } 
+             else if (filter.equals( "0")){
+                break;
+            }
+             else System.out.println("Неправильная команда ");                
         } 
     }
 }
